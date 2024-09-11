@@ -46,3 +46,13 @@
   font-size: 36px;
   width: 1000px;
 }
+
+table {
+  text-align: start;
+  font-size: 2em;
+  border-spacing: 5px;
+}
+
+tr {
+  background-color: darkgray;
+}

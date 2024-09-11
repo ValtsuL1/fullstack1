@@ -6,8 +6,17 @@ function App() {
   return (
     <>
     <div style={{ backgroundColor: 'gray' }}>
-        <h1>Vite + React</h1>
-      <textarea className={'textbox'}>tfyhtfytfgyu</textarea>
+        <table>
+          <tr>
+          eqweqewdsawe
+          </tr>
+          <tr>
+          effqse
+          </tr>
+          <tr>
+          ddadad
+          </tr>
+        </table>
     </div>
     </>
   )
