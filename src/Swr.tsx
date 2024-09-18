@@ -1,10 +1,11 @@
 import useSWR from 'swr';
+import axios from 'axios';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json())
+const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
-const url: string = 'https://localhost:3000/'
+const url: string = 'http://localhost:3000/';
 
-function UserById(id: number) {
+function useUser(id: number) {
     const { data, error, isLoading } = useSWR(url + `user/${id}`, fetcher)
 
     return {
@@ -14,4 +15,4 @@ function UserById(id: number) {
     }
 }
 
-export default UserById
+export default useUser
