@@ -1,35 +1,26 @@
 import './App.css'
-import useUser from './Swr'
-
-function GetUserByID(id: number) {
-  const { user, isLoading, isError } = useUser(id)
-
-  if (isLoading) return 'loading'
-  if (isError) {
-    console.log(isError);
-    return 'error';
-  }
-  return user
-}
+import useUser from './swr/useUser'
+import Login from './pages/Login'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from 'react-router-dom'
+import Home from './pages/Home'
+import { useState } from 'react'
 
 function App() {
-  console.log(GetUserByID(1))
+
+
+
   return (
-    <>
-      <div style={{ backgroundColor: 'gray' }}>
-        <table>
-          <tr>
-            {GetUserByID(1).username}
-          </tr>
-          <tr>
-            effqse
-          </tr>
-          <tr>
-            ddadad
-          </tr>
-        </table>
-      </div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   )
 
 }
