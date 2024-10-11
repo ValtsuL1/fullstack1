@@ -3,17 +3,20 @@ import useUserpost from "../swr/usePost"
 
 function Userpost() {
 
-    let {id} = useParams()
+    let { id } = useParams()
 
-    console.log(id)
+    const { userpost, isLoading, isError } = useUserpost(Number(id))
 
-    const {userpost, isLoading, isError} = useUserpost(id)
-
-    return(
+    return (
         <div>
-            <h1>POST</h1>
+            <h1>
+                {userpost?.title}
+            </h1>
+            <p>
+                {userpost?.content}
+            </p>
         </div>
-)
+    )
 }
 
 export default Userpost

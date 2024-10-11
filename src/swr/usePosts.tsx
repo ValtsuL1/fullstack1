@@ -5,7 +5,6 @@ const url: string = 'http://localhost:3000/';
 
 const fetcher = async (url: string) => await axios.get(url).then(res => res.data);
 
-
 function useUserposts() {
     const { data, error, isLoading } = useSWR(url + `user-post/`, fetcher)
     

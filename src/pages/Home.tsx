@@ -5,8 +5,6 @@ function Home() {
     //const userposts: Array<{ id: number, title: string }> = useUserposts().userposts
 
     const { userposts, isLoading, isError } = useUserposts()
-    
-    console.log(userposts)
 
     /*
     try {
