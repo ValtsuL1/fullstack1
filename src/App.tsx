@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom'
 import Home from './pages/Home'
 import { useState } from 'react'
+import Userpost from './pages/Userpost'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/userpost/:id" element={<Userpost />} />
       </Routes>
     </Router>
   )

@@ -1,13 +1,29 @@
 import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
-import useUserpost from "../swr/usePost"
-import useUser from "../swr/useUser"
 
 function Home() {
-    console.log(useUser(1))
+    //const userposts: Array<{ id: number, title: string }> = useUserposts().userposts
 
+    const { userposts, isLoading, isError } = useUserposts()
     
+    console.log(userposts)
 
+    /*
+    try {
+        userposts?.map((item: { id: number, title: string }) => {
+            if (isLoading) return <p>Loading</p>
+            if (isError) return <p>Error</p>
+            return (
+                <tr key={item.id}>
+                    <td>{item.title}</td>
+                </tr>
+            )
+        })
+
+    } catch (error) {
+        console.log(error)
+    }*/
+    
     return (
         <div>
             <div style={{
@@ -30,7 +46,21 @@ function Home() {
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {
+                            userposts?.map((item: { id: number, title: string }) => {
+                                if (isLoading) return <p>Loading</p>
+                                if (isError) return <p>Error</p>
+                                return (
+                                    <tr key={item.id}>
+                                        <td>
+                                            <Link to={`/userpost/${item.id}`}>
+                                                {item.title}
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
                     </tbody>
                 </table>
             </div>
