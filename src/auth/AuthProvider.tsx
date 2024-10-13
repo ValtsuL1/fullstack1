@@ -1,11 +1,10 @@
 import { createContext, useContext, useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type LoginType = {
-    username: string
     email: string
     password: string
-    remember: boolean | undefined
+    //remember: boolean | undefined
 }
 
 interface ProviderProps {

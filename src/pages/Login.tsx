@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useAuth } from "../auth/AuthProvider";
 
 function Login() {
 
+    const auth = useAuth()
+
     interface FormElements extends HTMLFormControlsCollection {
-        username: HTMLInputElement
         email: HTMLInputElement
         password: HTMLInputElement
     }
@@ -14,15 +16,15 @@ function Login() {
     }
 
     const [input, setInput] = useState({
-        username: "",
         email: "",
         password: "",
     })
 
     const handleSubmit = (e: React.FormEvent<FormElement>) => {
-        e.preventDefault();
-        if (input.username !== "" && input.password !== "" && input.email !== "") {
-            console.log(input.username)
+        e.preventDefault()
+        if (input.password !== "" && input.email !== "") {
+            auth.login(input)
+            return
         }
         alert("input not valid")
     }
@@ -39,15 +41,6 @@ function Login() {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        onChange={handleInput}
-                    />
-                </label>
                 <label>
                     <p>Email</p>
                     <input

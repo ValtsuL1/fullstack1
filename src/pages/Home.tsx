@@ -1,27 +1,18 @@
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
+import { useAuth } from "../auth/AuthProvider"
 
 function Home() {
-    //const userposts: Array<{ id: number, title: string }> = useUserposts().userposts
-
     const { userposts, isLoading, isError } = useUserposts()
 
-    /*
-    try {
-        userposts?.map((item: { id: number, title: string }) => {
-            if (isLoading) return <p>Loading</p>
-            if (isError) return <p>Error</p>
-            return (
-                <tr key={item.id}>
-                    <td>{item.title}</td>
-                </tr>
-            )
-        })
+    const auth = useAuth()
 
-    } catch (error) {
-        console.log(error)
-    }*/
-    
+    if(auth.token === "") {
+        return <Navigate to="/login" />
+    }
+
+    console.log(auth.user)
+
     return (
         <div>
             <div style={{

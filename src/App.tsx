@@ -1,28 +1,21 @@
 import './App.css'
-import useUser from './swr/useUser'
 import Login from './pages/Login'
 import {
-  BrowserRouter as Router,
   Route,
   Routes,
-  Link
-} from 'react-router-dom'
+  Navigate} from 'react-router-dom'
 import Home from './pages/Home'
-import { useState } from 'react'
 import Userpost from './pages/Userpost'
+import { useAuth } from './auth/AuthProvider'
 
 function App() {
 
-
-
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/userpost/:id" element={<Userpost />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/userpost/:id" element={<Userpost />} />
+    </Routes>
   )
 
 }
