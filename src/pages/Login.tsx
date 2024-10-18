@@ -1,10 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { useAuth } from "../auth/AuthProvider";
 
 function Login() {
 
-    const auth = useAuth()
 
     interface FormElements extends HTMLFormControlsCollection {
         email: HTMLInputElement
@@ -20,11 +18,24 @@ function Login() {
         password: "",
     })
 
-    const handleSubmit = (e: React.FormEvent<FormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<FormElement>) => {
         e.preventDefault()
         if (input.password !== "" && input.email !== "") {
-            auth.login(input)
-            return
+                await fetch("http://localhost:3000/auth/login", {
+                    method: 'POST',
+                    headers: {'content-Type': 'application/json'},
+                    credentials: 'include',
+                    body: JSON.stringify(
+                        {
+                            "email": input.email,
+                            "password": input.password
+                        }
+                    )
+                }).then(res => res.json()).then(res => {
+                    let token = res.access_token
+                    sessionStorage.setItem('token', token)
+                })
+                return true
         }
         alert("input not valid")
     }
@@ -37,7 +48,6 @@ function Login() {
         }))
     }
     
-
     return (
         <div>
             <form onSubmit={handleSubmit}>

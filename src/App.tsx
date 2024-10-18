@@ -2,11 +2,10 @@ import './App.css'
 import Login from './pages/Login'
 import {
   Route,
-  Routes,
-  Navigate} from 'react-router-dom'
+  Routes,} from 'react-router-dom'
 import Home from './pages/Home'
 import Userpost from './pages/Userpost'
-import { useAuth } from './auth/AuthProvider'
+import Register from './pages/Register'
 
 function App() {
 
@@ -14,6 +13,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path='register' element={<Register />}/>
       <Route path="/userpost/:id" element={<Userpost />} />
     </Routes>
   )

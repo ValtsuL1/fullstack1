@@ -5,14 +5,6 @@ import { useAuth } from "../auth/AuthProvider"
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
 
-    const auth = useAuth()
-
-    if(auth.token === "") {
-        return <Navigate to="/login" />
-    }
-
-    console.log(auth.user)
-
     return (
         <div>
             <div style={{
@@ -23,17 +15,19 @@ function Home() {
                 <h1>
                     Fullstack1
                 </h1>
-                <button>
-                    <Link to="/login">Login</Link>
-                </button>
+                <div style={{
+                    justifyContent: 'right'
+                }}>
+                    <button>
+                        <Link to="/login">Login</Link>
+                    </button>
+                    <button>
+                        <Link to="/register">Register</Link>
+                    </button>
+                </div>
             </div>
             <div style={{ backgroundColor: 'gray' }}>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         {
                             userposts?.map((item: { id: number, title: string }) => {
