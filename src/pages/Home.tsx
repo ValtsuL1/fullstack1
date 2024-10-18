@@ -1,6 +1,5 @@
-import { Link, Navigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
-import { useAuth } from "../auth/AuthProvider"
 
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
