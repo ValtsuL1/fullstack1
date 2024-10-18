@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 
 function Login() {
 
+    const navigate = useNavigate()
 
     interface FormElements extends HTMLFormControlsCollection {
         email: HTMLInputElement
@@ -35,7 +36,9 @@ function Login() {
                     let token = res.access_token
                     sessionStorage.setItem('token', token)
                 })
-                return true
+                navigate("/")
+                return true 
+                
         }
         alert("input not valid")
     }
