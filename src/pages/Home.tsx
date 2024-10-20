@@ -15,10 +15,15 @@ function Home() {
                 <h1>
                     Fullstack1
                 </h1>
+                { sessionStorage.getItem('token') &&
+                    <button>
+                        <Link to="/create">Create post</Link>
+                    </button>
+                }
                 <div style={{
                     justifyContent: 'right'
                 }}>
-                    { sessionStorage.getItem('token')?.length &&
+                    { sessionStorage.getItem('token') &&
                         <button onClick={Logout}>
                             Logout
                         </button>

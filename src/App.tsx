@@ -6,6 +6,7 @@ import {
 import Home from './pages/Home'
 import Userpost from './pages/Userpost'
 import Register from './pages/Register'
+import CreatePost from './pages/Createpost'
 
 function App() {
 
@@ -13,8 +14,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />}/>
+      <Route path="/register" element={<Register />} />
       <Route path="/userpost/:id" element={<Userpost />} />
+      <Route path="/create" element={<CreatePost/>} />
     </Routes>
   )
 
