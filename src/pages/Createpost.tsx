@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import GetDate from "../GetDate"
+import GetDate from "../functions/GetDate"
 
 
 function CreatePost() {
@@ -24,20 +24,24 @@ function CreatePost() {
 
     const handleSubmit = async (e: React.FormEvent<FormElement>) => {
         e.preventDefault()
-        await fetch("http://localhost:3000/auth/login", {
-            method: 'POST',
-            headers: {'content-Type': 'application/json'},
-            credentials: 'include',
-            body: JSON.stringify(
-                {
-                    "email": input.title,
-                    "password": input.content,
-                    "userId": localStorage.getItem("user_id"),
-                    "creationDate": GetDate()
-                }
-            )
-        })
-        navigate("/")
+        if (input.title !== "" && input.content !== "") {
+            await fetch("http://localhost:3000/user-post", {
+                method: 'POST',
+                headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+                credentials: 'include',
+                body: JSON.stringify(
+                    {
+                        "title": input.title,
+                        "content": input.content,
+                        "userId": localStorage.getItem("user_id"),
+                        "creationDate": GetDate()
+                    }
+                )
+            })
+            navigate("/")
+            return true
+        }
+        alert("input not valid")
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
-import Logout from "../Logout"
+import Logout from "../functions/Logout"
+import FormatDate from "../functions/FormatDate"
+import GetTime from "../functions/GetTime"
 
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
@@ -45,6 +47,7 @@ function Home() {
                             userposts?.map((item: { id: number, title: string, creationDate: string }) => {
                                 if (isLoading) return <p>Loading</p>
                                 if (isError) return <p>Error</p>
+                                console.log(item.creationDate)
                                 return (
                                     <tr key={item.id}>
                                         <td>
@@ -53,7 +56,7 @@ function Home() {
                                             </Link>
                                         </td>
                                         <td>
-                                            {item.creationDate}
+                                            {GetTime(item.creationDate)}
                                         </td>
                                     </tr>
                                 )
