@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
+import Logout from "../Logout"
 
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
@@ -17,9 +18,16 @@ function Home() {
                 <div style={{
                     justifyContent: 'right'
                 }}>
-                    <button>
-                        <Link to="/login">Login</Link>
-                    </button>
+                    { sessionStorage.getItem('token')?.length &&
+                        <button onClick={Logout}>
+                            Logout
+                        </button>
+                    }
+                    { !sessionStorage.getItem('token') &&
+                        <button>
+                            <Link to="/login">Login</Link>
+                        </button>
+                    }
                     <button>
                         <Link to="/register">Register</Link>
                     </button>
@@ -29,7 +37,7 @@ function Home() {
                 <table>
                     <tbody>
                         {
-                            userposts?.map((item: { id: number, title: string }) => {
+                            userposts?.map((item: { id: number, title: string, creationDate: string }) => {
                                 if (isLoading) return <p>Loading</p>
                                 if (isError) return <p>Error</p>
                                 return (
@@ -38,6 +46,9 @@ function Home() {
                                             <Link to={`/userpost/${item.id}`}>
                                                 {item.title}
                                             </Link>
+                                        </td>
+                                        <td>
+                                            {item.creationDate}
                                         </td>
                                     </tr>
                                 )
