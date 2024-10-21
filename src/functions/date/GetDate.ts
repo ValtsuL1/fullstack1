@@ -10,7 +10,7 @@ function GetDate() {
     const date = new Date()
     
     const year = date.getFullYear()
-    const month = date.getMonth()
+    const month = date.getMonth() + 1
     const day = date.getDate()
     let hour = date.getHours().toString()
     let minute = date.getMinutes().toString()

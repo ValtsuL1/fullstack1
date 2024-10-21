@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import GetDate from "../functions/GetDate"
+import GetDate from "../functions/date/GetDate"
 
 
 function CreatePost() {

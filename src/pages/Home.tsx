@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
 import Logout from "../functions/Logout"
-import FormatDate from "../functions/FormatDate"
-import GetTime from "../functions/GetTime"
+import FormatDate from "../functions/date/FormatDate"
+import GetTime from "../functions/date/GetTime"
 
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
