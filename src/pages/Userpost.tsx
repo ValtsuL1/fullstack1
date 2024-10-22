@@ -1,10 +1,10 @@
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import useUserpost from "../swr/usePost"
 import "./css/Userpost.css"
 import { useState } from "react"
 import GetDate from "../functions/date/GetDate"
-import useComments from "../swr/useComments"
 import Comments from "./Comments"
+import Header from "./Header"
 
 function Userpost() {
 
@@ -54,43 +54,46 @@ function Userpost() {
     }
 
     return (
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column"
-        }}>
-            <div className="post-container">
-                <div className="post-title">
-                    <p>
-                        {userpost?.title}
-                    </p>
-                </div>
-                <div className="post-body">
-                    <p>
-                        {userpost?.content}
-                    </p>
-                </div>
-            </div>
-            <div className="comment-create">
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        <p>Comment</p>
-                        <textarea
-                            id="content"
-                            name="content"
-                            onChange={handleTextarea}
-                            rows={20}
-                            cols={100}
-                        />
-                    </label>
-                    <div>
-                        <button type="submit">Submit</button>
+        <div>
+            <Header></Header>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column"
+            }}>
+                <div className="post-container">
+                    <div className="post-title">
+                        <p>
+                            {userpost?.title}
+                        </p>
                     </div>
-                </form>
-            </div>
-            
-            <div className="comments-container">
-                <Comments userPostId={Number(id)}></Comments>
+                    <div className="post-body">
+                        <p>
+                            {userpost?.content}
+                        </p>
+                    </div>
+                </div>
+                <div className="comment-create">
+                    <form onSubmit={handleSubmit}>
+                        <label>
+                            <p>Comment</p>
+                            <textarea
+                                id="content"
+                                name="content"
+                                onChange={handleTextarea}
+                                rows={20}
+                                cols={100}
+                            />
+                        </label>
+                        <div>
+                            <button type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div className="comments-container">
+                    <Comments userPostId={Number(id)}></Comments>
+                </div>
             </div>
         </div>
     )

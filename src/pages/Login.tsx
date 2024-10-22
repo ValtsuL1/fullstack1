@@ -35,6 +35,7 @@ function Login() {
                 }).then(res => res.json()).then(res => {
                     sessionStorage.setItem('token', res.access_token)
                     localStorage.setItem('user_id', res.user_id)
+                    localStorage.setItem('username', res.username)
                 })
                 navigate("/")
                 return true 

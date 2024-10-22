@@ -2,42 +2,20 @@ import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
 import Logout from "../functions/Logout"
 import GetTime from "../functions/date/GetTime"
+import Header from "./Header"
 
 function Home() {
     const { userposts, isLoading, isError } = useUserposts()
 
     return (
         <div>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-                <h1>
-                    Fullstack1
-                </h1>
+            <div>
+                <Header></Header>
                 { sessionStorage.getItem('token') &&
-                    <button>
-                        <Link to="/create">Create post</Link>
-                    </button>
-                }
-                <div style={{
-                    justifyContent: 'right'
-                }}>
-                    { sessionStorage.getItem('token') &&
-                        <button onClick={Logout}>
-                            Logout
-                        </button>
-                    }
-                    { !sessionStorage.getItem('token') &&
-                        <button>
-                            <Link to="/login">Login</Link>
-                        </button>
-                    }
-                    <button>
-                        <Link to="/register">Register</Link>
-                    </button>
-                </div>
+                <button>
+                    <Link to="/create">Create post</Link>
+                </button>
+            }
             </div>
             <div style={{ backgroundColor: 'gray' }}>
                 <table>
