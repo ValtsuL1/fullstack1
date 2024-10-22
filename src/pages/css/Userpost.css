@@ -1,0 +1,22 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    background-color: aquamarine;
+}
+
+.post-title {
+    background-color: aqua;
+    color: black;
+    font-size: 2rem;
+    width: 25%;
+}
+
+.post-body {
+    background-color: rgb(255, 123, 0);
+    color: black;
+    text-align: left;
+    padding-left: 5%;
+    font-size: 1.4rem;
+}

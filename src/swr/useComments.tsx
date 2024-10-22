@@ -7,14 +7,16 @@ const fetcher = async (url: string) => await axios.get(url, {
     headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
 }).then(res => res.data);
 
-function useUser(id: number) {
-    const { data, error, isLoading } = useSWR(url + `user/${id}`, fetcher)
+function useComments(userPostId: number) {
+    const { data, error, isLoading } = useSWR(url + `comment/${userPostId}`, fetcher)
+
+    console.log(data)
 
     return {
-        user: data,
+        comments: data,
         isLoading,
         isError: error
     }
 }
 
-export default useUser
+export default useComments

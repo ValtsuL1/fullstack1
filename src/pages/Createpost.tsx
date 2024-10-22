@@ -4,9 +4,7 @@ import GetDate from "../functions/date/GetDate"
 
 
 function CreatePost() {
-
     const navigate = useNavigate()
-    console.log(GetDate())
 
     interface FormElements extends HTMLFormControlsCollection {
         email: HTMLInputElement
