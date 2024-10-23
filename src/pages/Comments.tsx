@@ -33,7 +33,7 @@ function Comments(props: { userPostId: number }) {
                             })
                         }
                     </tbody>
-                </table>
+            </table>
         </div>
     )
     }

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import GetDate from "../functions/date/GetDate"
 
 function Register() {
 
@@ -35,7 +36,8 @@ function Register() {
                     {
                         "username": input.username,
                         "email": input.email,
-                        "password": input.password
+                        "password": input.password,
+                        "creationDate": GetDate()
                     }
                 )
 

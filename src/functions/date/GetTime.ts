@@ -4,16 +4,16 @@ function GetTime(date: string) {
 
     const seconds = (currentTime.getTime() - time.getTime()) / 1000
     if (seconds < 60) {
-        return Math.trunc(seconds) + " seconds ago"
+        return Math.trunc(seconds) + " s ago"
     }
     else if (seconds < 3600) {
-        return Math.trunc(seconds / 60) + " minutes ago"
+        return Math.trunc(seconds / 60) + " m ago"
     }
     else if (seconds < 86400) {
-        return Math.trunc(seconds / 3600) + " hours ago"
+        return Math.trunc(seconds / 3600) + " h ago"
     }
     else {
-        return Math.trunc(seconds / 86400) + " days ago"
+        return Math.trunc(seconds / 86400) + " d ago"
     }
 }
 

@@ -19,7 +19,7 @@ function Header() {
                 justifyContent: 'right'
             }}>
                 { sessionStorage.getItem('token') && user &&
-                    <p>Logged in as: {user.username}</p>
+                    <p>Logged in as: <Link to={`/profile/${localStorage.getItem('user_id')}`}>{user.username}</Link></p>
                 }
                 
                 { sessionStorage.getItem('token') &&
