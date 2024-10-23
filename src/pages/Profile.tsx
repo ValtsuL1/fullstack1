@@ -68,13 +68,15 @@ function Profile() {
                 <table>
                         <tbody>
                             {
-                                comments?.map((item: { id: number, content: string, creationDate: string }) => {
+                                comments?.map((item: { id: number, content: string, creationDate: string, userPostId: number }) => {
                                     if (isLoadingComments) return <p>Loading</p>
                                     if (isErrorComments) return <p>Error</p>
                                     return (
                                         <tr key={item.id}>
                                             <td width={"90%"}>
+                                                <Link to={`/userpost/${item.userPostId}`}>
                                                 {item.content}
+                                                </Link>
                                             </td>
                                             <td>
                                                 {GetTime(item.creationDate)}

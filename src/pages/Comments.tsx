@@ -1,12 +1,23 @@
+import { Link } from "react-router-dom"
 import GetTime from "../functions/date/GetTime"
 import useComment from "../swr/useComments.tsx"
 
 function Comments(props: { userPostId: number }) {
     interface User {
         username: string
+        id: number
     }
 
     const { comments,  isLoading, isError } = useComment(props.userPostId)
+
+    async function DeleteComment(id: number) {
+        await fetch(`http://localhost:3000/comment/${id}`, {
+            method: 'DELETE',
+            headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+            credentials: 'include',
+        })
+        return true
+    }
 
     if (comments) {
     return (
@@ -21,9 +32,16 @@ function Comments(props: { userPostId: number }) {
                                     <tr key={item.id}>
                                         <td width={"80%"}>
                                             {item.content}
+                                        { Number(localStorage.getItem('user_id')) == item.user.id &&
+                                            <button onClick={() => DeleteComment(item.user.id)}>
+                                                Delete
+                                            </button>
+                                        }
                                         </td>
                                         <td>
+                                            <Link to={`/profile/${item.user.id}`}>
                                             {item.user.username}
+                                            </Link>
                                         </td>
                                         <td>
                                             {GetTime(item.creationDate)}

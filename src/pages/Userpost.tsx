@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import useUserpost from "../swr/usePost"
 import "./css/Userpost.css"
 import { useEffect, useState } from "react"
@@ -7,6 +7,7 @@ import Comments from "./Comments"
 import Header from "./Header"
 
 function Userpost() {
+    const navigate = useNavigate()
 
     let { id } = useParams()
 
@@ -56,6 +57,16 @@ function Userpost() {
         }))
     }
 
+    async function DeletePost() {
+        await fetch(`http://localhost:3000/user-post/${userpost.id}`, {
+            method: 'DELETE',
+            headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+            credentials: 'include',
+        })
+        navigate("/")
+        return true
+    }
+
     if (userpost) {
     return (
         <div>
@@ -76,12 +87,29 @@ function Userpost() {
                             {userpost?.content}
                         </p>
                     </div>
+                    
                 </div>
+                { localStorage.getItem('user_id') == userpost.user.id &&
+                        <div style={{
+                            textAlign: "left"
+                        }}>
+                            <button onClick={DeletePost}>
+                                Delete
+                            </button>
+                        </div>
+                    }
                 <div>
-                    <p>Created by: {userpost.user.username}</p>
+                    <p>
+                        Created by: 
+                        <Link to={`/profile/${userpost.user.id}`}>
+                             {userpost.user.username}
+                        </Link>
+                    </p>
+                    {sessionStorage.getItem('token') &&
                     <button onClick={() => setShow(!show)}>
                         Comment
                     </button>
+                    }
                 </div>
                 {show && sessionStorage.getItem('token') &&
                     <div className="comment-create">

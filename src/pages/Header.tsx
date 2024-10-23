@@ -11,9 +11,11 @@ function Header() {
             justifyContent: 'space-between',
             alignItems: 'center'
         }}>
-            <h1>
-                Fullstack1
-            </h1>
+            <Link to="/">
+                <h1>
+                    Fullstack1
+                </h1>
+            </Link>
 
             <div style={{
                 justifyContent: 'right'

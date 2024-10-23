@@ -36,7 +36,7 @@ function Login() {
                     sessionStorage.setItem('token', res.access_token)
                     localStorage.setItem('user_id', res.user_id)
                 })
-                navigate("/")
+                navigate(-1)
                 return true 
                 
         }

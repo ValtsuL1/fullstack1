@@ -7,6 +7,7 @@ import Header from "./Header"
 function Home() {
     interface User {
         username: string
+        id: number
     }
 
     const { userposts, isLoading, isError } = useUserposts()
@@ -30,13 +31,16 @@ function Home() {
                                 if (isError) return <p>Error</p>
                                 return (
                                     <tr key={item.id}>
-                                        <td width={"70%"}>
+                                        <td width={"60%"}>
                                             <Link to={`/userpost/${item.id}`}>
                                                 {item.title}
                                             </Link>
                                         </td>
                                         <td>
-                                            {item.user.username}
+                                            Created by: 
+                                            <Link to={`profile/${item.user.id}`}>
+                                                {item.user.username}
+                                            </Link>
                                         </td>
                                         <td>
                                             {GetTime(item.creationDate)}
