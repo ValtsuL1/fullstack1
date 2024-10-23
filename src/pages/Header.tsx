@@ -14,13 +14,14 @@ function Header() {
             <h1>
                 Fullstack1
             </h1>
-           
+
             <div style={{
                 justifyContent: 'right'
             }}>
                 { sessionStorage.getItem('token') && user &&
-                    user.username
+                    <p>Logged in as: {user.username}</p>
                 }
+                
                 { sessionStorage.getItem('token') &&
                     <button onClick={Logout}>
                         Logout

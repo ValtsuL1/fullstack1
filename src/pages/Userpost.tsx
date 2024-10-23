@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import useUserpost from "../swr/usePost"
 import "./css/Userpost.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import GetDate from "../functions/date/GetDate"
 import Comments from "./Comments"
 import Header from "./Header"
@@ -24,6 +24,8 @@ function Userpost() {
         content: ""
     })
 
+    const [show, setShow] = useState(false)
+
     const handleSubmit = async (e: React.FormEvent<FormElement>) => {
         e.preventDefault()
         if (input.content !== "") {
@@ -40,9 +42,10 @@ function Userpost() {
                     }
                 )
             })
+            window.location.reload()
             return true
         }
-        alert("input not valid")
+        alert("Comment is empty")
     }
 
     const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -53,6 +56,7 @@ function Userpost() {
         }))
     }
 
+    if (userpost) {
     return (
         <div>
             <Header></Header>
@@ -73,23 +77,31 @@ function Userpost() {
                         </p>
                     </div>
                 </div>
-                <div className="comment-create">
-                    <form onSubmit={handleSubmit}>
-                        <label>
-                            <p>Comment</p>
-                            <textarea
-                                id="content"
-                                name="content"
-                                onChange={handleTextarea}
-                                rows={20}
-                                cols={100}
-                            />
-                        </label>
-                        <div>
-                            <button type="submit">Submit</button>
-                        </div>
-                    </form>
+                <div>
+                    <p>Created by: {userpost.user.username}</p>
+                    <button onClick={() => setShow(!show)}>
+                        Comment
+                    </button>
                 </div>
+                {show && sessionStorage.getItem('token') &&
+                    <div className="comment-create">
+                        <form onSubmit={handleSubmit}>
+                            <label>
+                                <p>Comment</p>
+                                <textarea
+                                    id="content"
+                                    name="content"
+                                    onChange={handleTextarea}
+                                    rows={8}
+                                    cols={100}
+                                />
+                            </label>
+                            <div>
+                                <button type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                }
                 
                 <div className="comments-container">
                     <Comments userPostId={Number(id)}></Comments>
@@ -97,6 +109,7 @@ function Userpost() {
             </div>
         </div>
     )
+    }
 }
 
 export default Userpost

@@ -10,8 +10,6 @@ const fetcher = async (url: string) => await axios.get(url, {
 function useComments(userPostId: number) {
     const { data, error, isLoading } = useSWR(url + `comment/${userPostId}`, fetcher)
 
-    console.log(data)
-
     return {
         comments: data,
         isLoading,

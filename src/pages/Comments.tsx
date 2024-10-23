@@ -8,8 +8,6 @@ function Comments(props: { userPostId: number }) {
 
     const { comments,  isLoading, isError } = useComment(props.userPostId)
 
-    console.log(comments)
-
     if (comments) {
     return (
         <div>
