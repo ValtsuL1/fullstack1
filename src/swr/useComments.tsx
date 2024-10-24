@@ -1,13 +1,9 @@
 import useSWR from 'swr';
-import axios from 'axios';
-
-const url: string = 'http://localhost:3000/';
-
-const fetcher = async (url: string) => await axios.get(url, {
-    headers: { Authorization: "Bearer " + sessionStorage.getItem('token') }
-}).then(res => res.data);
+import GetFetcher from './fetcherProvider';
 
 function useComments(userPostId: number) {
+    const { fetcher, url } = GetFetcher()
+
     const { data, error, isLoading } = useSWR(url + `comment/${userPostId}`, fetcher)
 
     return {

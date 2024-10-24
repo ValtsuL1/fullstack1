@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import GetTime from "../functions/date/GetTime"
 import useComment from "../swr/useComments.tsx"
+import './css/Comments.css'
 
 function Comments(props: { userPostId: number }) {
     interface User {
@@ -21,7 +22,7 @@ function Comments(props: { userPostId: number }) {
 
     if (comments) {
     return (
-        <div>
+        <div className="comments-container">
             <table>
                     <tbody>
                         {
@@ -30,13 +31,8 @@ function Comments(props: { userPostId: number }) {
                                 if (isError) return <p>Error</p>
                                 return (
                                     <tr key={item.id}>
-                                        <td width={"80%"}>
+                                        <td width={"70%"}>
                                             {item.content}
-                                        { Number(localStorage.getItem('user_id')) == item.user.id &&
-                                            <button onClick={() => DeleteComment(item.user.id)}>
-                                                Delete
-                                            </button>
-                                        }
                                         </td>
                                         <td>
                                             <Link to={`/profile/${item.user.id}`}>
@@ -46,6 +42,13 @@ function Comments(props: { userPostId: number }) {
                                         <td>
                                             {GetTime(item.creationDate)}
                                         </td>
+                                        { Number(localStorage.getItem('user_id')) == item.user.id &&
+                                        <td>
+                                            <button onClick={() => DeleteComment(item.user.id)} >
+                                                Delete
+                                            </button>
+                                        </td>
+                                        } 
                                     </tr>
                                 )
                             })

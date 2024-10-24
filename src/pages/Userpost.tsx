@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import useUserpost from "../swr/usePost"
 import "./css/Userpost.css"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import GetDate from "../functions/date/GetDate"
 import Comments from "./Comments"
 import Header from "./Header"
@@ -32,7 +32,7 @@ function Userpost() {
         if (input.content !== "") {
             await fetch("http://localhost:3000/comment", {
                 method: 'POST',
-                headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+                headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token') },
                 credentials: 'include',
                 body: JSON.stringify(
                     {
@@ -50,7 +50,7 @@ function Userpost() {
     }
 
     const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,
@@ -60,7 +60,7 @@ function Userpost() {
     async function DeletePost() {
         await fetch(`http://localhost:3000/user-post/${userpost.id}`, {
             method: 'DELETE',
-            headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+            headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token') },
             credentials: 'include',
         })
         navigate("/")
@@ -68,28 +68,28 @@ function Userpost() {
     }
 
     if (userpost) {
-    return (
-        <div>
-            <Header></Header>
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column"
-            }}>
-                <div className="post-container">
-                    <div className="post-title">
-                        <p>
-                            {userpost?.title}
-                        </p>
+        return (
+            <div>
+                <Header></Header>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column"
+                }}>
+                    <div className="post-container">
+                        <div className="post-title">
+                            <p>
+                                {userpost?.title}
+                            </p>
+                        </div>
+                        <div className="post-body">
+                            <p>
+                                {userpost?.content}
+                            </p>
+                        </div>
+
                     </div>
-                    <div className="post-body">
-                        <p>
-                            {userpost?.content}
-                        </p>
-                    </div>
-                    
-                </div>
-                { localStorage.getItem('user_id') == userpost.user.id &&
+                    {localStorage.getItem('user_id') == userpost.user.id &&
                         <div style={{
                             textAlign: "left"
                         }}>
@@ -98,45 +98,45 @@ function Userpost() {
                             </button>
                         </div>
                     }
-                <div>
-                    <p>
-                        Created by: 
-                        <Link to={`/profile/${userpost.user.id}`}>
-                             {userpost.user.username}
-                        </Link>
-                    </p>
-                    {sessionStorage.getItem('token') &&
-                    <button onClick={() => setShow(!show)}>
-                        Comment
-                    </button>
-                    }
-                </div>
-                {show && sessionStorage.getItem('token') &&
-                    <div className="comment-create">
-                        <form onSubmit={handleSubmit}>
-                            <label>
-                                <p>Comment</p>
-                                <textarea
-                                    id="content"
-                                    name="content"
-                                    onChange={handleTextarea}
-                                    rows={8}
-                                    cols={100}
-                                />
-                            </label>
-                            <div>
-                                <button type="submit">Submit</button>
-                            </div>
-                        </form>
+                    <div>
+                        <p>
+                            Created by:
+                            <Link to={`/profile/${userpost.user.id}`}>
+                                {userpost.user.username}
+                            </Link>
+                        </p>
+                        {sessionStorage.getItem('token') &&
+                            <button onClick={() => setShow(!show)}>
+                                Comment
+                            </button>
+                        }
                     </div>
-                }
-                
-                <div className="comments-container">
-                    <Comments userPostId={Number(id)}></Comments>
+                    {show && sessionStorage.getItem('token') &&
+                        <div className="comment-create">
+                            <form onSubmit={handleSubmit}>
+                                <label>
+                                    <p>Comment</p>
+                                    <textarea
+                                        id="content"
+                                        name="content"
+                                        onChange={handleTextarea}
+                                        rows={8}
+                                        cols={100}
+                                    />
+                                </label>
+                                <div>
+                                    <button type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    }
+
+                    <div className="comments-container">
+                        <Comments userPostId={Number(id)}></Comments>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
     }
 }
 

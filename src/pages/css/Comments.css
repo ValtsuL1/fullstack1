@@ -1,0 +1,15 @@
+.comments-container {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+}
+
+table {
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+button {
+    background-color: green;
+    color: gray;
+}
