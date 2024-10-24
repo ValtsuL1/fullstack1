@@ -23,6 +23,7 @@ function Comments(props: { userPostId: number }) {
     if (comments) {
     return (
         <div className="comments-container">
+            
             <table>
                     <tbody>
                         {
@@ -43,13 +44,19 @@ function Comments(props: { userPostId: number }) {
                                             {GetTime(item.creationDate)}
                                         </td>
                                         { Number(localStorage.getItem('user_id')) == item.user.id &&
-                                        <td>
-                                            <button onClick={() => DeleteComment(item.user.id)} >
+                                        <td className="delete-update-buttons">
+                                            <button onClick={() => DeleteComment(item.id)} >
                                                 Delete
                                             </button>
+                                            <Link to={`/userpost/${props.userPostId}/comment/${item.id}`}>
+                                                <button>
+                                                    Update
+                                                </button>
+                                            </Link>
                                         </td>
-                                        } 
+                                        }
                                     </tr>
+                                    
                                 )
                             })
                         }

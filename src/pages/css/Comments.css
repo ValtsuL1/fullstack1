@@ -5,11 +5,25 @@
 }
 
 table {
-    flex-flow: row;
+    flex-flow: column;
     justify-content: space-between;
 }
 
 button {
     background-color: green;
     color: gray;
+    max-width: 100px;
+    font-size: 2em;
+}
+
+td.delete-update-buttons {
+    width: 1%;
+    font-size: 0.5em;
+    text-align: center;
+}
+
+thead.comment-update {
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }

@@ -4,7 +4,7 @@ import GetFetcher from './fetcherProvider';
 function useComments(userPostId: number) {
     const { fetcher, url } = GetFetcher()
 
-    const { data, error, isLoading } = useSWR(url + `comment/${userPostId}`, fetcher)
+    const { data, error, isLoading } = useSWR(url + `comment/user-post/${userPostId}`, fetcher)
 
     return {
         comments: data,

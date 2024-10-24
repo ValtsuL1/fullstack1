@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
-import Logout from "../functions/Logout"
 import GetTime from "../functions/date/GetTime"
 import Header from "./Header"
 

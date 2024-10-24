@@ -1,16 +1,16 @@
 import useSWR from 'swr';
 import GetFetcher from './fetcherProvider';
 
-function useUserpost(id: number) {
+function useComment(id: number) {
     const { fetcher, url } = GetFetcher()
 
-    const { data, error, isLoading } = useSWR(url + `user-post/${id}`, fetcher)
+    const { data, error, isLoading } = useSWR(url + `comment/${id}`, fetcher)
 
     return {
-        userpost: data,
+        comment: data,
         isLoading,
         isError: error
     }
 }
 
-export default useUserpost
+export default useComment

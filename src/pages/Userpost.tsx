@@ -11,7 +11,7 @@ function Userpost() {
 
     let { id } = useParams()
 
-    const { userpost, isLoading, isError } = useUserpost(Number(id))
+    const { userpost } = useUserpost(Number(id))
 
     interface FormElements extends HTMLFormControlsCollection {
         content: HTMLInputElement
@@ -96,6 +96,11 @@ function Userpost() {
                             <button onClick={DeletePost}>
                                 Delete
                             </button>
+                            <Link to={`/userpost/update/${Number(id)}`}>
+                                <button>
+                                    Update
+                                </button>
+                            </Link>
                         </div>
                     }
                     <div>
@@ -111,7 +116,7 @@ function Userpost() {
                             </button>
                         }
                     </div>
-                    {show && sessionStorage.getItem('token') &&
+                    { show && sessionStorage.getItem('token') &&
                         <div className="comment-create">
                             <form onSubmit={handleSubmit}>
                                 <label>
