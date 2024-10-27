@@ -20,7 +20,7 @@ function Updatecomment() {
     const { comment } = useComment(Number(commentid))
 
     const navigate = useNavigate()
-    
+
     const [input, setInput] = useState({
         content: ""
     })
@@ -45,7 +45,7 @@ function Updatecomment() {
     }
 
     const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,
@@ -53,39 +53,39 @@ function Updatecomment() {
     }
 
     if (comment) {
-        
-    return (
-        <div>
-            <div className="post-container">
-                <div className="post-title">
-                    <p>
-                        {userpost?.title}
-                    </p>
+
+        return (
+            <div>
+                <div className="post-container">
+                    <div className="post-title">
+                        <p>
+                            {userpost?.title}
+                        </p>
+                    </div>
+                    <div className="post-body">
+                        <p>
+                            {userpost?.content}
+                        </p>
+                    </div>
                 </div>
-                <div className="post-body">
-                    <p>
-                        {userpost?.content}
-                    </p>
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        <p>Update comment</p>
+                        <textarea
+                            id="content"
+                            name="content"
+                            onChange={handleTextarea}
+                            defaultValue={comment.content}
+                            rows={8}
+                            cols={100}
+                        />
+                    </label>
+                    <div>
+                        <button type="submit">Update</button>
+                    </div>
+                </form>
             </div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Update comment</p>
-                    <textarea
-                        id="content"
-                        name="content"
-                        onChange={handleTextarea}
-                        defaultValue={comment.content}
-                        rows={8}
-                        cols={100}
-                    />
-                </label>
-                <div>
-                    <button type="submit">Update</button>
-                </div>
-            </form>
-        </div>
-    )
+        )
     }
     else {
         return (

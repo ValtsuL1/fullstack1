@@ -11,7 +11,7 @@ function Profile() {
     let { id } = useParams()
 
     const { user } = useUser(Number(id))
-    
+
     const [showPosts, setShowPosts] = useState(true)
 
     const { userposts, isLoading: isLoadingPosts, isError: isErrorPosts } = useProfilePosts(Number(id))
@@ -19,36 +19,63 @@ function Profile() {
     const { comments, isLoading: isLoadingComments, isError: isErrorComments } = useProfileComments(Number(id))
 
     if (user) {
-    return (
-        
-        <div>
-            <Header></Header>
+        return (
+
             <div>
-                <h1>
-                    {user.username}
-                </h1>
-                <h2>
-                   Created on: {FormatDate(user.creationDate)}
-                </h2>
-            </div>
-            <div>
-                <button onClick={() => setShowPosts(true)}>Posts</button>
-                <button onClick={() => setShowPosts(false)}>Comments</button>
-            </div>
-            <div>
-            { showPosts &&
+                <Header></Header>
                 <div>
-                    <table>
+                    <h1>
+                        {user.username}
+                    </h1>
+                    <h2>
+                        Created on: {FormatDate(user.creationDate)}
+                    </h2>
+                </div>
+                <div>
+                    <button onClick={() => setShowPosts(true)}>Posts</button>
+                    <button onClick={() => setShowPosts(false)}>Comments</button>
+                </div>
+                <div>
+                    {showPosts &&
+                        <div>
+                            <table>
+                                <tbody>
+                                    {
+                                        userposts?.map((item: { id: number, title: string, creationDate: string }) => {
+                                            if (isLoadingPosts) return <p>Loading</p>
+                                            if (isErrorPosts) return <p>Error</p>
+                                            return (
+                                                <tr key={item.id}>
+                                                    <td width={"90%"} style={{ fontSize: '1.5em' }}>
+                                                        <Link to={`/userpost/${item.id}`}>
+                                                            {item.title}
+                                                        </Link>
+                                                    </td>
+                                                    <td>
+                                                        {GetTime(item.creationDate)}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                </div>
+                <div>
+                    {!showPosts &&
+                        <table>
                             <tbody>
                                 {
-                                    userposts?.map((item: { id: number, title: string, creationDate: string }) => {
-                                        if (isLoadingPosts) return <p>Loading</p>
-                                        if (isErrorPosts) return <p>Error</p>
+                                    comments?.map((item: { id: number, content: string, creationDate: string, userPostId: number }) => {
+                                        if (isLoadingComments) return <p>Loading</p>
+                                        if (isErrorComments) return <p>Error</p>
                                         return (
                                             <tr key={item.id}>
                                                 <td width={"90%"}>
-                                                    <Link to={`/userpost/${item.id}`}>
-                                                        {item.title}
+                                                    <Link to={`/userpost/${item.userPostId}`}>
+                                                        {item.content}
                                                     </Link>
                                                 </td>
                                                 <td>
@@ -60,37 +87,10 @@ function Profile() {
                                 }
                             </tbody>
                         </table>
+                    }
                 </div>
-            }
             </div>
-            <div>
-            { !showPosts &&
-                <table>
-                        <tbody>
-                            {
-                                comments?.map((item: { id: number, content: string, creationDate: string, userPostId: number }) => {
-                                    if (isLoadingComments) return <p>Loading</p>
-                                    if (isErrorComments) return <p>Error</p>
-                                    return (
-                                        <tr key={item.id}>
-                                            <td width={"90%"}>
-                                                <Link to={`/userpost/${item.userPostId}`}>
-                                                {item.content}
-                                                </Link>
-                                            </td>
-                                            <td>
-                                                {GetTime(item.creationDate)}
-                                            </td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                </table>
-            }
-            </div>
-        </div>
-    )
+        )
     }
 }
 

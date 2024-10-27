@@ -25,7 +25,7 @@ function CreatePost() {
         if (input.title !== "" && input.content !== "") {
             await fetch("http://localhost:3000/user-post", {
                 method: 'POST',
-                headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+                headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token') },
                 credentials: 'include',
                 body: JSON.stringify(
                     {
@@ -43,7 +43,7 @@ function CreatePost() {
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,
@@ -51,7 +51,7 @@ function CreatePost() {
     }
 
     const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,

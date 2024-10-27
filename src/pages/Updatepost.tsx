@@ -29,7 +29,7 @@ function UpdatePost() {
         if (input.title !== "" && input.content !== "") {
             await fetch(`http://localhost:3000/user-post/${userpost.id}`, {
                 method: 'PATCH',
-                headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+                headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token') },
                 credentials: 'include',
                 body: JSON.stringify(
                     {
@@ -45,7 +45,7 @@ function UpdatePost() {
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,
@@ -53,7 +53,7 @@ function UpdatePost() {
     }
 
     const handleTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,

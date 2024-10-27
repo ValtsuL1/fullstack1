@@ -22,35 +22,35 @@ function Login() {
     const handleSubmit = async (e: React.FormEvent<FormElement>) => {
         e.preventDefault()
         if (input.password !== "" && input.email !== "") {
-                await fetch("http://localhost:3000/auth/login", {
-                    method: 'POST',
-                    headers: {'content-Type': 'application/json'},
-                    credentials: 'include',
-                    body: JSON.stringify(
-                        {
-                            "email": input.email,
-                            "password": input.password
-                        }
-                    )
-                }).then(res => res.json()).then(res => {
-                    sessionStorage.setItem('token', res.access_token)
-                    localStorage.setItem('user_id', res.user_id)
-                })
-                navigate(-1)
-                return true 
-                
+            await fetch("http://localhost:3000/auth/login", {
+                method: 'POST',
+                headers: { 'content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(
+                    {
+                        "email": input.email,
+                        "password": input.password
+                    }
+                )
+            }).then(res => res.json()).then(res => {
+                sessionStorage.setItem('token', res.access_token)
+                localStorage.setItem('user_id', res.user_id)
+            })
+            navigate(-1)
+            return true
+
         }
         alert("input not valid")
     }
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
+        const { name, value } = e.target
         setInput((prev) => ({
             ...prev,
             [name]: value,
         }))
     }
-    
+
     return (
         <div>
             <form onSubmit={handleSubmit}>

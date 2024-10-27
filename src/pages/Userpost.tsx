@@ -98,7 +98,7 @@ function Userpost() {
                                 {userpost?.content}
                             </p>
                         </div>
-                        
+
 
                     </div>
                     {localStorage.getItem('user_id') == userpost.user.id &&
@@ -122,7 +122,7 @@ function Userpost() {
                             </button>
                         }
                     </div>
-                    { show && sessionStorage.getItem('token') &&
+                    {show && sessionStorage.getItem('token') &&
                         <div className="comment-create">
                             <form onSubmit={handleSubmit}>
                                 <label>

@@ -20,20 +20,20 @@ function Header() {
             <div style={{
                 justifyContent: 'right'
             }}>
-                { sessionStorage.getItem('token') && user &&
+                {sessionStorage.getItem('token') && user &&
                     <p>Logged in as:{' '}
                         <Link to={`/profile/${localStorage.getItem('user_id')}`}>
                             {user.username}
                         </Link>
                     </p>
                 }
-                
-                { sessionStorage.getItem('token') &&
+
+                {sessionStorage.getItem('token') &&
                     <button onClick={Logout}>
                         Logout
                     </button>
                 }
-                { !sessionStorage.getItem('token') &&
+                {!sessionStorage.getItem('token') &&
                     <Link to="/login">
                         <button>
                             Login

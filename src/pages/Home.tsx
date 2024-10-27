@@ -15,7 +15,7 @@ function Home() {
         <div>
             <div>
                 <Header></Header>
-                { sessionStorage.getItem('token') &&
+                {sessionStorage.getItem('token') &&
                     <div style={{ padding: '1%' }}>
                         <Link to="/create">
                             <button>
@@ -41,10 +41,10 @@ function Home() {
                                         </td>
                                         <td>
                                             <div>
-                                            Created by:{' '}
-                                            <Link to={`profile/${item.user.id}`}>
-                                                {item.user.username}
-                                            </Link>
+                                                Created by:{' '}
+                                                <Link to={`profile/${item.user.id}`}>
+                                                    {item.user.username}
+                                                </Link>
                                             </div>
                                             <div>
                                                 {GetTime(item.creationDate)}

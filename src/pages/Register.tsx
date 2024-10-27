@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import GetDate from "../functions/date/GetDate"
+import './css/Register.css'
 
 function Register() {
 
@@ -60,51 +61,57 @@ function Register() {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        onChange={handleInput}
-                    />
-                </label>
-                <label>
-                    <p>Email</p>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        onChange={handleInput}
-                    />
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={handleInput}
-                    />
-                </label>
-                <label>
-                    <p>Password again</p>
-                    <input
-                        type="password"
-                        id="passwordR"
-                        name="passwordR"
-                        onChange={handleInput}
-                    />
-                </label>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-            <button>
-                <Link to={"/"}>Home</Link>
-            </button>
+        <div className="form-container">
+            <div className="form-body">
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        <p>Username</p>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            onChange={handleInput}
+                        />
+                    </label>
+                    <label>
+                        <p>Email</p>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            onChange={handleInput}
+                        />
+                    </label>
+                    <label>
+                        <p>Password</p>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            onChange={handleInput}
+                        />
+                    </label>
+                    <label>
+                        <p>Password again</p>
+                        <input
+                            type="password"
+                            id="passwordR"
+                            name="passwordR"
+                            onChange={handleInput}
+                        />
+                    </label>
+                    <div className="buttons">
+                        <button type="submit">
+                            Register
+                        </button>
+                        <Link to={"/"}>
+                            <button>
+                                Back
+                            </button>
+                        </Link>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
