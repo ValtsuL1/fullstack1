@@ -9,61 +9,66 @@ function Comments(props: { userPostId: number }) {
         id: number
     }
 
-    const { comments,  isLoading, isError } = useComment(props.userPostId)
+    const { comments, isLoading, isError } = useComment(props.userPostId)
 
     async function DeleteComment(id: number) {
         await fetch(`http://localhost:3000/comment/${id}`, {
             method: 'DELETE',
-            headers: {'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token')},
+            headers: { 'content-Type': 'application/json', 'Authorization': 'Bearer ' + sessionStorage.getItem('token') },
             credentials: 'include',
         })
         return true
     }
 
     if (comments) {
-    return (
-        <div className="comments-container">
-            
-            <table>
+        return (
+            <div className="comments-container">
+
+                <table>
                     <tbody>
                         {
                             comments?.map((item: { id: number, content: string, creationDate: string, user: User }) => {
                                 if (isLoading) return <p>Loading</p>
                                 if (isError) return <p>Error</p>
-                                return (
+                                return ( 
                                     <tr key={item.id}>
                                         <td width={"70%"}>
                                             {item.content}
+                                        </td>                                      
+                                        <td className="comment-info">
+                                            <div>
+                                                <p style={{lineHeight: '0'}}>
+                                                    Created by:{' '}
+                                                    <Link to={`/profile/${item.user.id}`}>
+                                                        {item.user.username}
+                                                    </Link>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                {GetTime(item.creationDate)}
+                                            </div>
+                                            {Number(localStorage.getItem('user_id')) == item.user.id &&
+                                                <div className="comment-buttons">
+                                                    <button onClick={() => DeleteComment(item.id)} >
+                                                        Delete
+                                                    </button>
+                                                    <Link to={`/userpost/${props.userPostId}/comment/${item.id}`}>
+                                                        <button>
+                                                            Update
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            }
                                         </td>
-                                        <td>
-                                            <Link to={`/profile/${item.user.id}`}>
-                                            {item.user.username}
-                                            </Link>
-                                        </td>
-                                        <td>
-                                            {GetTime(item.creationDate)}
-                                        </td>
-                                        { Number(localStorage.getItem('user_id')) == item.user.id &&
-                                        <td className="delete-update-buttons">
-                                            <button onClick={() => DeleteComment(item.id)} >
-                                                Delete
-                                            </button>
-                                            <Link to={`/userpost/${props.userPostId}/comment/${item.id}`}>
-                                                <button>
-                                                    Update
-                                                </button>
-                                            </Link>
-                                        </td>
-                                        }
                                     </tr>
-                                    
+
                                 )
                             })
                         }
                     </tbody>
-            </table>
-        </div>
-    )
+                </table>
+            </div>
+        )
     }
     else {
         return (

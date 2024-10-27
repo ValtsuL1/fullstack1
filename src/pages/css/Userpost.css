@@ -1,22 +1,50 @@
 .post-container {
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
     justify-content: center;
-    width: 75%;
+    width: 100%;
     background-color: gray;
+    border-color: black;
+    border-style: solid;
+}
+
+.post-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .post-title {
-    background-color: aqua;
+    background-color: gainsboro;
     color: black;
     font-size: 2rem;
-    width: 25%;
+    width: 20%;
+    border-color: black;
+    border-right-style: solid;
+    text-align: left;
+    padding-left: 2%;
+    box-sizing: border-box;
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: large;
+    align-items: center;
+    padding: 1%;
+    background-color: azure;
+    border-left-style: solid;
+    width: 20%;
+    line-height: 0.2;
 }
 
 .post-body {
-    background-color: rgb(255, 123, 0);
+    background-color: whitesmoke;
     color: black;
     text-align: left;
-    padding-left: 5%;
+    padding-left: 2%;
     font-size: 1.4rem;
+    border-color: black;
+    border-top-style: solid;
 }

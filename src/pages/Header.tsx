@@ -21,7 +21,11 @@ function Header() {
                 justifyContent: 'right'
             }}>
                 { sessionStorage.getItem('token') && user &&
-                    <p>Logged in as: <Link to={`/profile/${localStorage.getItem('user_id')}`}>{user.username}</Link></p>
+                    <p>Logged in as:{' '}
+                        <Link to={`/profile/${localStorage.getItem('user_id')}`}>
+                            {user.username}
+                        </Link>
+                    </p>
                 }
                 
                 { sessionStorage.getItem('token') &&
@@ -30,13 +34,17 @@ function Header() {
                     </button>
                 }
                 { !sessionStorage.getItem('token') &&
-                    <button>
-                        <Link to="/login">Login</Link>
-                    </button>
+                    <Link to="/login">
+                        <button>
+                            Login
+                        </button>
+                    </Link>
                 }
-                <button>
-                    <Link to="/register">Register</Link>
-                </button>
+                <Link to="/register">
+                    <button>
+                        Register
+                    </button>
+                </Link>
             </div>
         </div>
     )

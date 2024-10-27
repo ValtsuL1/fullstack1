@@ -5,6 +5,7 @@ import { useState } from "react"
 import GetDate from "../functions/date/GetDate"
 import Comments from "./Comments"
 import Header from "./Header"
+import FormatDate from "../functions/date/FormatDate"
 
 function Userpost() {
     const navigate = useNavigate()
@@ -71,22 +72,33 @@ function Userpost() {
         return (
             <div>
                 <Header></Header>
-                <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column"
-                }}>
+                <div>
                     <div className="post-container">
-                        <div className="post-title">
-                            <p>
-                                {userpost?.title}
-                            </p>
+                        <div className="post-header">
+                            <div className="post-title">
+                                <p>
+                                    {userpost?.title}
+                                </p>
+                            </div>
+                            <div className="post-info">
+                                <p>
+                                    Created by:{' '}
+                                    <Link to={`/profile/${userpost.user.id}`}>
+                                        {userpost.user.username}
+                                    </Link>
+                                </p>
+                                <p>
+                                    Created on:{' '}
+                                    {FormatDate(userpost.creationDate)}
+                                </p>
+                            </div>
                         </div>
                         <div className="post-body">
                             <p>
                                 {userpost?.content}
                             </p>
                         </div>
+                        
 
                     </div>
                     {localStorage.getItem('user_id') == userpost.user.id &&
@@ -104,12 +116,6 @@ function Userpost() {
                         </div>
                     }
                     <div>
-                        <p>
-                            Created by:
-                            <Link to={`/profile/${userpost.user.id}`}>
-                                {userpost.user.username}
-                            </Link>
-                        </p>
                         {sessionStorage.getItem('token') &&
                             <button onClick={() => setShow(!show)}>
                                 Comment

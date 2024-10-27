@@ -20,9 +20,9 @@ function Updatecomment() {
     const { comment } = useComment(Number(commentid))
 
     const navigate = useNavigate()
-
+    
     const [input, setInput] = useState({
-        content: comment.content
+        content: ""
     })
 
     const handleSubmit = async (e: React.FormEvent<FormElement>) => {
