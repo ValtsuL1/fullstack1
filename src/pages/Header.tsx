@@ -8,6 +8,8 @@ function Header() {
     
     const { user } = useUser(Number(userId))
 
+    console.log("test")
+
     return (
         <div style={{
             display: 'flex',
