@@ -2,11 +2,31 @@ import { Link } from "react-router-dom"
 import GetTime from "../functions/date/GetTime"
 import useComment from "../swr/useComments.tsx"
 import './css/Comments.css'
+import { getId, getRole } from "../decoder/decoder.ts"
 
 function Comments(props: { userPostId: number }) {
     interface User {
         username: string
         id: number
+    }
+
+    const userId = getId()
+    const userRole = getRole()
+
+    function GetButtons(id: number) {
+        if (userId == id || userRole == 'admin') {
+            return <div className="comment-buttons">
+                <button onClick={() => DeleteComment(id)} >
+                    Delete
+                </button>
+                <Link to={`/userpost/${props.userPostId}/comment/${id}`}>
+                    <button>
+                        Update
+                    </button>
+                </Link>
+            </div>
+        }
+        else return null
     }
 
     const { comments, isLoading, isError } = useComment(props.userPostId)
@@ -30,14 +50,14 @@ function Comments(props: { userPostId: number }) {
                             comments?.map((item: { id: number, content: string, creationDate: string, user: User }) => {
                                 if (isLoading) return <p>Loading</p>
                                 if (isError) return <p>Error</p>
-                                return ( 
+                                return (
                                     <tr key={item.id}>
                                         <td width={"70%"}>
                                             {item.content}
-                                        </td>                                      
+                                        </td>
                                         <td className="comment-info">
                                             <div>
-                                                <p style={{lineHeight: '0'}}>
+                                                <p style={{ lineHeight: '0' }}>
                                                     Created by:{' '}
                                                     <Link to={`/profile/${item.user.id}`}>
                                                         {item.user.username}
@@ -47,18 +67,9 @@ function Comments(props: { userPostId: number }) {
                                             <div>
                                                 {GetTime(item.creationDate)}
                                             </div>
-                                            {Number(localStorage.getItem('user_id')) == item.user.id &&
-                                                <div className="comment-buttons">
-                                                    <button onClick={() => DeleteComment(item.id)} >
-                                                        Delete
-                                                    </button>
-                                                    <Link to={`/userpost/${props.userPostId}/comment/${item.id}`}>
-                                                        <button>
-                                                            Update
-                                                        </button>
-                                                    </Link>
-                                                </div>
-                                            }
+                                            <div>
+                                                {GetButtons(item.user.id)}
+                                            </div>
                                         </td>
                                     </tr>
 

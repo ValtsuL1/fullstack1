@@ -1,10 +1,13 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import GetDate from "../functions/date/GetDate"
+import { getId } from "../decoder/decoder"
 
 
 function CreatePost() {
     const navigate = useNavigate()
+
+    const userId = getId()
 
     interface FormElements extends HTMLFormControlsCollection {
         email: HTMLInputElement
@@ -31,7 +34,7 @@ function CreatePost() {
                     {
                         "title": input.title,
                         "content": input.content,
-                        "userId": localStorage.getItem("user_id"),
+                        "userId": userId,
                         "creationDate": GetDate()
                     }
                 )

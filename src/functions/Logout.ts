@@ -2,7 +2,7 @@
 
 function Logout() {
     sessionStorage.removeItem('token')
-    localStorage.removeItem('user_id')
+    sessionStorage.removeItem('user_id')
     window.location.reload()
 }
 

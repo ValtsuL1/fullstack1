@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import Logout from "../functions/Logout";
 import useUser from "../swr/useUser";
+import { getId } from "../decoder/decoder";
 
 function Header() {
-    const { user } = useUser(Number(localStorage.getItem('user_id')))
+    const userId = getId()
+    
+    const { user } = useUser(Number(userId))
 
     return (
         <div style={{
@@ -22,7 +25,7 @@ function Header() {
             }}>
                 {sessionStorage.getItem('token') && user &&
                     <p>Logged in as:{' '}
-                        <Link to={`/profile/${localStorage.getItem('user_id')}`}>
+                        <Link to={`/profile/${userId}`}>
                             {user.username}
                         </Link>
                     </p>

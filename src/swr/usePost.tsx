@@ -5,7 +5,7 @@ function useUserpost(id: number) {
     const { fetcher, url } = GetFetcher()
 
     const { data, error, isLoading } = useSWR(url + `user-post/${id}`, fetcher)
-
+    console.log(data)
     return {
         userpost: data,
         isLoading,

@@ -6,6 +6,7 @@ import GetDate from "../functions/date/GetDate"
 import Comments from "./Comments"
 import Header from "./Header"
 import FormatDate from "../functions/date/FormatDate"
+import { getId, getRole } from "../decoder/decoder"
 
 function Userpost() {
     const navigate = useNavigate()
@@ -13,6 +14,27 @@ function Userpost() {
     let { id } = useParams()
 
     const { userpost } = useUserpost(Number(id))
+
+    const userId = getId()
+    const userRole = getRole()
+
+    function GetButtons() {
+        if (userId == userpost.userId || userRole == 'admin') {
+            return <div style={{
+                textAlign: "left"
+                }}>
+                <button onClick={DeletePost}>
+                    Delete
+                </button>
+                <Link to={`/userpost/update/${Number(id)}`}>
+                    <button>
+                        Update
+                    </button>
+                </Link>
+            </div>
+        }
+        else return null
+    }
 
     interface FormElements extends HTMLFormControlsCollection {
         content: HTMLInputElement
@@ -39,7 +61,7 @@ function Userpost() {
                     {
                         "content": input.content,
                         "creationDate": GetDate(),
-                        "userId": Number(localStorage.getItem("user_id")),
+                        "userId": userId,
                         "userPostId": Number(id)
                     }
                 )
@@ -68,6 +90,7 @@ function Userpost() {
         return true
     }
 
+
     if (userpost) {
         return (
             <div>
@@ -89,6 +112,8 @@ function Userpost() {
                                 </p>
                                 <p>
                                     Created on:{' '}
+                                </p>
+                                <p>
                                     {FormatDate(userpost.creationDate)}
                                 </p>
                             </div>
@@ -101,20 +126,7 @@ function Userpost() {
 
 
                     </div>
-                    {localStorage.getItem('user_id') == userpost.user.id &&
-                        <div style={{
-                            textAlign: "left"
-                        }}>
-                            <button onClick={DeletePost}>
-                                Delete
-                            </button>
-                            <Link to={`/userpost/update/${Number(id)}`}>
-                                <button>
-                                    Update
-                                </button>
-                            </Link>
-                        </div>
-                    }
+                        {GetButtons()}
                     <div>
                         {sessionStorage.getItem('token') &&
                             <button onClick={() => setShow(!show)}>
