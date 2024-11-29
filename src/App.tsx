@@ -10,6 +10,7 @@ import CreatePost from './pages/Createpost'
 import Profile from './pages/Profile'
 import UpdatePost from './pages/Updatepost'
 import Updatecomment from './pages/Updatecomment'
+import Chat from './pages/Chat'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/userpost/update/:id" element={<UpdatePost />} />
       <Route path="/userpost/:userpostid/comment/:commentid" element={<Updatecomment />} />
+      <Route path="/chat/:id" element={<Chat/>}/>
     </Routes>
   )
 
