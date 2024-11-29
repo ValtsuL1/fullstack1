@@ -8,10 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: windows-latest
     strategy:
       matrix:
-        node-version: [12x., 14.x, 16.x]
+        node-version: [20.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +21,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install dependencies
-      run: npm
+      run: npm install
     - name: Build the project
-      run: npm build
+      run: npm run build
   
   
