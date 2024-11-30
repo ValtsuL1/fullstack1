@@ -1,16 +1,24 @@
 import { useCallback, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import useWebSocket, { ReadyState } from "react-use-websocket"
+import { io, Socket } from "socket.io-client"
+import { createServer } from "http";
 
 function Chat() {
     let { id } = useParams()
 
-    const WS_BASE_URL = "ws://localhost:8000/ws/"
+    const socket = io("http://localhost:3000", {
+        withCredentials: true,
+        extraHeaders: {
+            'authorization': 'Bearer ' + sessionStorage.getItem('token')
+        }
+    })
 
     const[messageHistory, setMessageHistory] = useState<MessageEvent<any>[]>([])
-    const { sendMessage, lastMessage, readyState } = useWebSocket(WS_BASE_URL + id)
+    //const { sendMessage, lastMessage, readyState } = useWebSocket(io)
     const [currentMessage, setCurrentMessage] = useState('')
-
+    
+    /*
     useEffect(() => {
         if (lastMessage !== null) {
             setMessageHistory((prev) => prev.concat(lastMessage))
@@ -21,14 +29,16 @@ function Chat() {
         sendMessage(currentMessage)
         setCurrentMessage(() => '')
     }, [currentMessage])
+    */
+    
 
-    const connectionStatus = {
-        [ReadyState.CONNECTING]: 'Connecting',
-        [ReadyState.OPEN]: 'Open',
-        [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed',
-        [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-      }[readyState];
+    const test = () => {
+        socket.emit("ping")
+    }
+
+    socket.on("pong", (...args) => {
+        console.log("received")
+    })
 
     return (
         <div>
@@ -47,12 +57,12 @@ function Chat() {
             </textarea>
             
             <button 
-                onClick={handleClickSendMessage}
-                disabled={readyState !== ReadyState.OPEN || currentMessage === ''}
+                onClick={test}
+                
             >
                 Send
             </button>
-            <span>Connection status: {connectionStatus}</span>
+            <span>Connection status: </span>
 
         </div>
     )
