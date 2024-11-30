@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState } from "react"
+import { useState } from "react"
 import { useParams } from "react-router-dom"
-import useWebSocket, { ReadyState } from "react-use-websocket"
-import { io, Socket } from "socket.io-client"
-import { createServer } from "http";
+import { io } from "socket.io-client"
 
 function Chat() {
     let { id } = useParams()
