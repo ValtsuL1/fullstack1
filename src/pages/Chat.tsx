@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
 import { io } from "socket.io-client"
 import { getId } from "../decoder/decoder"
 import useUser from "../swr/useUser"

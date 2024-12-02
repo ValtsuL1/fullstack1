@@ -20,8 +20,6 @@ function Header() {
                 </h1>
             </Link>
 
-            
-
             <div style={{
                 justifyContent: 'right'
             }}>
