@@ -22,6 +22,11 @@ function Home() {
                                 Create post
                             </button>
                         </Link>
+                        <Link to="/chat">
+                            <button>
+                                Chatroom
+                            </button>
+                        </Link>
                     </div>
                 }
             </div>

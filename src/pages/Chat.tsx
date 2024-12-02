@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { io } from "socket.io-client"
 import { getId } from "../decoder/decoder"
 import useUser from "../swr/useUser"
+import Header from "./Header"
 
 function Chat() {
     const userId = getId()
@@ -48,12 +49,9 @@ function Chat() {
         console.log(messageHistory)
     })
 
-    socket.on("pong", (...args) => {
-        console.log(args)
-    })
-
     return (
         <div>
+            <Header></Header>
             <h1>Chat</h1>
             <table>
                 <tbody>
