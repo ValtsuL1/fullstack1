@@ -24,7 +24,7 @@ function App() {
       <Route path="/profile/:id" element={<Profile />} />
       <Route path="/userpost/update/:id" element={<UpdatePost />} />
       <Route path="/userpost/:userpostid/comment/:commentid" element={<Updatecomment />} />
-      <Route path="/chat/:id" element={<Chat/>}/>
+      <Route path="/chat" element={<Chat/>}/>
     </Routes>
   )
 
