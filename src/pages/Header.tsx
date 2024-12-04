@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import Logout from "../functions/Logout";
 import useUser from "../swr/useUser";
-import { getId } from "../decoder/decoder";
+import { getId, getRole } from "../decoder/decoder";
 
 function Header() {
     const userId = getId()
+    const userRole = getRole()
     
     const { user } = useUser(Number(userId))
 
@@ -19,6 +20,14 @@ function Header() {
                     Fullstack1
                 </h1>
             </Link>
+            
+            {userRole == "admin" &&
+                <Link to="/admin">
+                    <button>
+                        Admin page
+                    </button>
+                </Link>
+            }
 
             <div style={{
                 justifyContent: 'right'

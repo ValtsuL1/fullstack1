@@ -5,6 +5,7 @@ interface PayLoad extends JwtPayload {
     role: string
 }
 
+// gets user id from decoced jwt token
 export function getId() {
     if (sessionStorage.getItem('token') == null) {
         return null
@@ -13,6 +14,7 @@ export function getId() {
     return decodedToken.id
 }
 
+// gets user role from decoced jwt token
 export function getRole() {
     if (sessionStorage.getItem('token') == null) {
         return null

@@ -3,6 +3,7 @@ import { io } from "socket.io-client"
 import { getId } from "../decoder/decoder"
 import useUser from "../swr/useUser"
 import Header from "./Header"
+import './css/Chat.css'
 
 function Chat() {
     const userId = getId()
@@ -52,15 +53,17 @@ function Chat() {
         <div>
             <Header></Header>
             <h1>Chat</h1>
-            <table>
-                <tbody>
-                    {
-                        messageHistory?.map((message) => (
-                            <p>{message.username}: {message.content}</p>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div className="chat-container">
+                <table>
+                    <tbody>
+                        {
+                            messageHistory?.map((message) => (
+                                <tr className="chat-row">{message.username}: {message.content}</tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
 
             <textarea 
                 value={currentMessage} 

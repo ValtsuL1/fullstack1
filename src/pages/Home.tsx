@@ -4,6 +4,8 @@ import GetTime from "../functions/date/GetTime"
 import Header from "./Header"
 
 function Home() {
+    
+
     interface User {
         username: string
         id: number
