@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import GetTime from "../functions/date/GetTime"
 import useComment from "../swr/useComments.tsx"
 import './css/Comments.css'
-import { getId, getRole } from "../decoder/decoder.ts"
+import { getId, getRole, getState } from "../decoder/decoder.ts"
 
 function Comments(props: { userPostId: number }) {
     interface User {
@@ -12,8 +12,14 @@ function Comments(props: { userPostId: number }) {
 
     const userId = getId()
     const userRole = getRole()
+    const userState = getState()
 
     function GetButtons(id: number) {
+        if (userId == id && userState == 'banned') {
+            return <div style={{ color: "red" }}>
+                Banned from commenting
+            </div>
+        }
         if (userId == id || userRole == 'admin') {
             return <div className="comment-buttons">
                 <button onClick={() => DeleteComment(id)} >

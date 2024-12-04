@@ -3,6 +3,7 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 interface PayLoad extends JwtPayload {
     id: number
     role: string
+    state: string
 }
 
 // gets user id from decoced jwt token
@@ -21,4 +22,12 @@ export function getRole() {
     }
     const decodedToken = jwtDecode<PayLoad>(sessionStorage.getItem('token') || "")
     return decodedToken.role
+}
+
+export function getState() {
+    if (sessionStorage.getItem('token') == null) {
+        return null
+    }
+    const decodedToken = jwtDecode<PayLoad>(sessionStorage.getItem('token') || "")
+    return decodedToken.state
 }

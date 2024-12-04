@@ -6,7 +6,7 @@ import GetDate from "../functions/date/GetDate"
 import Comments from "./Comments"
 import Header from "./Header"
 import FormatDate from "../functions/date/FormatDate"
-import { getId, getRole } from "../decoder/decoder"
+import { getId, getRole, getState } from "../decoder/decoder"
 
 function Userpost() {
     const navigate = useNavigate()
@@ -17,6 +17,7 @@ function Userpost() {
 
     const userId = getId()
     const userRole = getRole()
+    const userState = getState()
 
     function GetButtons() {
         if (userId == userpost.userId || userRole == 'admin') {
@@ -48,7 +49,7 @@ function Userpost() {
         content: ""
     })
 
-    const [show, setShow] = useState(false)
+    const [showCommentArea, setShowCommentArea] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent<FormElement>) => {
         e.preventDefault()
@@ -90,6 +91,21 @@ function Userpost() {
         return true
     }
 
+    function showCommentButton() {
+        if (sessionStorage.getItem('token') && userState == 'normal') {
+            return  <div> 
+                <button onClick={() => setShowCommentArea(!showCommentArea)}>
+                    Comment
+                </button>
+            </div>
+        }
+        else if(userState == 'banned') {
+            return <div style={{ color: "red" }}>
+                Banned from commenting
+            </div>
+        }
+    }
+
 
     if (userpost) {
         return (
@@ -128,13 +144,9 @@ function Userpost() {
                     </div>
                         {GetButtons()}
                     <div>
-                        {sessionStorage.getItem('token') &&
-                            <button onClick={() => setShow(!show)}>
-                                Comment
-                            </button>
-                        }
+                        {showCommentButton()}
                     </div>
-                    {show && sessionStorage.getItem('token') &&
+                    {showCommentArea &&
                         <div className="comment-create">
                             <form onSubmit={handleSubmit}>
                                 <label>

@@ -2,9 +2,10 @@ import { Link } from "react-router-dom"
 import useUserposts from "../swr/usePosts"
 import GetTime from "../functions/date/GetTime"
 import Header from "./Header"
+import { getState } from "../decoder/decoder"
 
 function Home() {
-    
+    const userState = getState()
 
     interface User {
         username: string
@@ -13,24 +14,33 @@ function Home() {
 
     const { userposts, isLoading, isError } = useUserposts()
 
+    function showButtons() {
+        if (sessionStorage.getItem('token') && userState == 'normal') {
+            return <div style={{ padding: '1%' }}>
+                <Link to="/create">
+                    <button>
+                        Create post
+                    </button>
+                </Link>
+                <Link to="/chat">
+                    <button>
+                        Chatroom
+                    </button>
+                </Link>
+            </div>
+        }
+        else if(userState == 'banned') {
+            return <div style={{ color: "red" }}>
+                Banned from posting
+            </div>
+        }
+    }
+
     return (
         <div>
             <div>
                 <Header></Header>
-                {sessionStorage.getItem('token') &&
-                    <div style={{ padding: '1%' }}>
-                        <Link to="/create">
-                            <button>
-                                Create post
-                            </button>
-                        </Link>
-                        <Link to="/chat">
-                            <button>
-                                Chatroom
-                            </button>
-                        </Link>
-                    </div>
-                }
+                {showButtons()}
             </div>
             <div>
                 <table>
